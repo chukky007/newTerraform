@@ -27,44 +27,22 @@ jobs:
       with:
         terraform_version: 1.5.0
 
-    # Step 3: Extract Service Principal Credentials
-    # - name: Extract Azure Credentials
-    #   id: azure_credentials
-    #   run: |
-    #     echo "::set-output name=clientId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .clientId)"
-    #     echo "::set-output name=clientSecret::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .clientSecret)"
-    #     echo "::set-output name=subscriptionId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .subscriptionId)"
-    #     echo "::set-output name=tenantId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .tenantId)"
-
-
     - name: Azure Login
       uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       # Step 4: Log in to Azure using the extracted credentials
     - name: Terraform init
-      # uses: azure/login@v1.5.0
-      # with:
-      #   client-id: ${{ secrets.AZURE_CREDENTIALS }}
-      #   tenant-id: ${{ secrets.AZURE_CREDENTIALS }}
-      #   subscription-id: ${{ secrets.AZURE_CREDENTIALS }}
-      #   environment: 'AzureCloud'
-      # auth-type: federated
-      # client-id: ${{ steps.azure_credentials.outputs.clientId }}
-      # Step 5: Initialize Terraform
-      # client-secret: ${{ steps.azure_credentials.outputs.clientSecret }}
-      # tenant-id: ${{ steps.azure_credentials.outputs.tenantId }}
-      # subscription-id: ${{ steps.azure_credentials.outputs.subscriptionId }}
-      # auth-type: id-token
       run: terraform init
-      working-directory: aks-deploy/main.tf
+      working-directory: aks-deploy
 
     # Step 6: Terraform Plan (Optional, helps you see what will be applied)
     - name: Terraform Plan
       run: terraform plan
-      working-directory: aks-deploy/main.tf
+      working-directory: aks-deploy
 
     # Step 7: Terraform Apply (to deploy the resources to Azure)
     - name: Terraform Apply
       run: terraform apply
-      working-directory: aks-deploy/main.tf
+      working-directory: aks-deploy
