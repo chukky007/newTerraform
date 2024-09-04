@@ -92,30 +92,3 @@ output "aks_cluster_name" {
 output "aks_managed_id" {
   value = azurerm_user_assigned_identity.aks_identity.id
 }
-
-
-
-# # Managed Identity for AKS
-# resource "azurerm_log_analytics_workspace" "aks_log_analytics" {
-#   name = "aks-log-analytics"
-#   location = data.azurerm_resource_group.demo-test-lab-uks-rg-1.location
-#   resource_group_name = data.azurerm_resource_group.demo-test-lab-uks-rg-1.name
-#   sku = "perGB2018"
-#   retention_in_days = 30
-# }
-
-# # AKS Cluster
-# resource "azurerm_kubernetes_cluster" "chuka_cluster-1" {
-#   name = "chuka-cluster-1"
-#   location = data.azurerm_resource_group.demo-test-lab-uks-rg-1.location
-#   resource_group_name = data.azurerm_resource_group.demo-test-lab-uks-rg-1.name
-#   dns_prefix = "chukacluster"
-
-#   default_node_pool {
-#     name = "chukapool"
-#     node_count = 3
-#     vm_size = "Standard_DS2_v2"
-#     vnet_subnet_id = azurerm_subnet.aks_subnet.id
-#   }
-# }
-
