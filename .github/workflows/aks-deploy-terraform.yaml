@@ -44,6 +44,7 @@ jobs:
         client-secret: ${{ steps.azure_credentials.outputs.clientSecret }}
         tenant-id: ${{ steps.azure_credentials.outputs.tenantId }}
         subscription-id: ${{ steps.azure_credentials.outputs.subscriptionId }}
+        auth-type: id-token
 
     # Step 5: Initialize Terraform
     - name: Terraform init
