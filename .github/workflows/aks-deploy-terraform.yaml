@@ -44,5 +44,5 @@ jobs:
 
     # Step 7: Terraform Apply (to deploy the resources to Azure)
     - name: Terraform Apply
-      run: terraform apply -var "subscription_id=${{ secrets.AZURE_CREDENTIALS }}"
+      run: terraform apply -auto-approve -var "subscription_id=${{ secrets.AZURE_CREDENTIALS }}"
       working-directory: aks-deploy
