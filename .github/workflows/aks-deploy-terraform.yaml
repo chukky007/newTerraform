@@ -38,7 +38,7 @@ jobs:
 
     - name: Azure Login
       # Step 4: Log in to Azure using the extracted credentials
-      uses: azure/login@v1.5.0
+      uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CREDENTIALS }}
         tenant-id: ${{ secrets.AZURE_CREDENTIALS }}
