@@ -8,22 +8,22 @@ provider "azurerm" {
 }
 
 # Reference to Existing Azure resource group
-data "azurerm_resource_group" "demo-test-lab-uks-rg-1" {
-  name = "demo-test-lab-uks-rg-1"
+data "azurerm_resource_group" "demo-test-rg-1" {
+  name = "demo-test-rg-1"
 }
 
 # Virtual Network
 resource "azurerm_virtual_network" "aks_new_vnet" {
   name = "aks-new-vnet"
   address_space = [ "10.1.0.0/16" ]
-  location = data.azurerm_resource_group.demo-test-lab-uks-rg-1.location
-  resource_group_name = data.azurerm_resource_group.demo-test-lab-uks-rg-1.name
+  location = data.azurerm_resource_group.demo-test-rg-1.location
+  resource_group_name = data.azurerm_resource_group.demo-test-rg-1.name
 }
 
 # Subnet
 resource "azurerm_subnet" "aks_new_subnet" {
   name = "aks-new-subnet"
-  resource_group_name = data.azurerm_resource_group.demo-test-lab-uks-rg-1.name
+  resource_group_name = data.azurerm_resource_group.demo-test-rg-1.name
   virtual_network_name = azurerm_virtual_network.aks_new_vnet.name
   address_prefixes = [ "10.1.0.0/24" ]
 
@@ -42,15 +42,15 @@ resource "azurerm_subnet" "aks_new_subnet" {
 # Managed Identity for AKS
 resource "azurerm_user_assigned_identity" "aks_identity" {
   name = "aks-identity"
-  resource_group_name = data.azurerm_resource_group.demo-test-lab-uks-rg-1.name
-  location = data.azurerm_resource_group.demo-test-lab-uks-rg-1.location
+  resource_group_name = data.azurerm_resource_group.demo-test-rg-1.name
+  location = data.azurerm_resource_group.demo-test-rg-1.location
 }
 
 # Log Analytics Workspace
 resource "azurerm_log_analytics_workspace" "aks_log_analytics" {
   name = "aks-log-analytics"
-  location = data.azurerm_resource_group.demo-test-lab-uks-rg-1.location
-  resource_group_name = data.azurerm_resource_group.demo-test-lab-uks-rg-1.name
+  location = data.azurerm_resource_group.demo-test-rg-1.location
+  resource_group_name = data.azurerm_resource_group.demo-test-rg-1.name
   sku = "PerGB2018"
   retention_in_days = 30
 }
@@ -58,8 +58,8 @@ resource "azurerm_log_analytics_workspace" "aks_log_analytics" {
 # AKS cluster
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
   name = "aks-cluster"
-  location = data.azurerm_resource_group.demo-test-lab-uks-rg-1.location
-  resource_group_name = data.azurerm_resource_group.demo-test-lab-uks-rg-1.name
+  location = data.azurerm_resource_group.demo-test-rg-1.location
+  resource_group_name = data.azurerm_resource_group.demo-test-rg-1.name
   dns_prefix = "akscluster"
 
   default_node_pool {
