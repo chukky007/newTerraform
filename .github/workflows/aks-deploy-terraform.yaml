@@ -28,25 +28,28 @@ jobs:
         terraform_version: 1.5.0
 
     # Step 3: Extract Service Principal Credentials
-    - name: Extract Azure Credentials
-      id: azure_credentials
-      run: |
-        echo "::set-output name=clientId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .clientId)"
-        echo "::set-output name=clientSecret::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .clientSecret)"
-        echo "::set-output name=subscriptionId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .subscriptionId)"
-        echo "::set-output name=tenantId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .tenantId)"
+    # - name: Extract Azure Credentials
+    #   id: azure_credentials
+    #   run: |
+    #     echo "::set-output name=clientId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .clientId)"
+    #     echo "::set-output name=clientSecret::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .clientSecret)"
+    #     echo "::set-output name=subscriptionId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .subscriptionId)"
+    #     echo "::set-output name=tenantId::$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r .tenantId)"
 
     - name: Azure Login
       # Step 4: Log in to Azure using the extracted credentials
       uses: azure/login@v1
       with:
-        client-id: ${{ steps.azure_credentials.outputs.clientId }}
-        client-secret: ${{ steps.azure_credentials.outputs.clientSecret }}
-        tenant-id: ${{ steps.azure_credentials.outputs.tenantId }}
-        subscription-id: ${{ steps.azure_credentials.outputs.subscriptionId }}
+        client-id: ${{ secrets.AZURE_CREDENTIALS }}
+        tenant-id: ${{ secrets.AZURE_CREDENTIALS }}
+        subscription-id: ${{ secrets.AZURE_CREDENTIALS }}
         auth-type: id-token
-
-    # Step 5: Initialize Terraform
+        # client-id: ${{ steps.azure_credentials.outputs.clientId }}
+      # Step 5: Initialize Terraform
+      # client-secret: ${{ steps.azure_credentials.outputs.clientSecret }}
+      # tenant-id: ${{ steps.azure_credentials.outputs.tenantId }}
+      # subscription-id: ${{ steps.azure_credentials.outputs.subscriptionId }}
+      # auth-type: id-token
     - name: Terraform init
       run: terraform init
       working-directory: aks-deploy/main.tf
