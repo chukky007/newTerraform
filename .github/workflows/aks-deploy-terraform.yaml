@@ -39,7 +39,7 @@ jobs:
 
     # Step 6: Terraform Plan (Optional, helps you see what will be applied)
     - name: Terraform Plan
-      run: terraform plan
+      run: terraform plan -var "subscription_id=${{ secrets.AZURE_CREDENTIALS }}"
       working-directory: aks-deploy
 
     # Step 7: Terraform Apply (to deploy the resources to Azure)
