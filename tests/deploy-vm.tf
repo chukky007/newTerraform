@@ -6,7 +6,7 @@ provider "azurerm" {
 
 # Reference the existing Resource Group
 data "azurerm_resource_group" "existing_rg" {
-  name = "demo-test-lab-uks-rg-1"  # Replace with your existing resource group name
+  name = "demo-test-rg-1"  # Replace with your existing resource group name
 }
 
 # Create a Virtual Network in the existing Resource Group
