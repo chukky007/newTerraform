@@ -32,10 +32,10 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Step 4: Log in to Azure using the extracted credentials
-    # - name: Terraform init
-    #   run: terraform init
-    #   working-directory: tests
+    # Step 4: Log in to Azure using the extracted credentials
+    - name: Terraform init
+      run: terraform init
+      working-directory: tests
 
     # # Step 6: Terraform Plan (Optional, helps you see what will be applied)
     # - name: Terraform Plan
