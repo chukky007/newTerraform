@@ -2,6 +2,11 @@
 provider "azurerm" {
   features {}
   use_cli = true  # If you're using Azure CLI for authentication
+
+  subscription_id = var.subscription_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
 }
 
 # Reference the existing Resource Group
