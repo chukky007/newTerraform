@@ -35,17 +35,17 @@ jobs:
     # Step 4: Log in to Azure using the extracted credentials
     - name: Terraform init
       run: terraform init
-      working-directory: tests
+      working-directory: aks-deploy
 
     # # Step 6: Terraform Plan (Optional, helps you see what will be applied)
     - name: Terraform Plan
       run: terraform plan -var "subscription_id=${{ secrets.SUBSCRIPTION_ID }}" -var "client_secret=${{ secrets.CLIENT_SECRET }}" -var "tenant_id=${{ secrets.TENANT_ID }}" -var "client_id=${{ secrets.CLIENT_ID }}"
-      working-directory: tests
+      working-directory: aks-deploy
 
     # Step 7: Terraform Apply (to deploy the resources to Azure)
     - name: Terraform Apply
       run: terraform apply -auto-approve -var "subscription_id=${{ secrets.SUBSCRIPTION_ID }}" -var "client_secret=${{ secrets.CLIENT_SECRET }}" -var "tenant_id=${{ secrets.TENANT_ID }}" -var "client_id=${{ secrets.CLIENT_ID }}"
-      working-directory: tests
+      working-directory: aks-deploy
 
     # Step 8: Terraform Destroy (for removing resources)
 
