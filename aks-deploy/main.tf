@@ -84,7 +84,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     admin_group_object_ids = [ "74e06b24-3114-4d29-91ba-1535050839fb" ]
   }
 
-  kubernetes_version = "1.29.0"
+  kubernetes_version = "1.28.0"
   node_resource_group = "aks-nodes-rg"
 }
 
