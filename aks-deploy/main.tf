@@ -63,9 +63,9 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   dns_prefix = "akscluster"
 
   default_node_pool {
-    name = "default"
-    node_count = 3
-    vm_size = "Standard_B2s"
+    name = "chukky"
+    node_count = 2
+    vm_size = "Standard B2s"
     vnet_subnet_id = azurerm_subnet.aks_new_subnet.id
   }
 
@@ -84,7 +84,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     admin_group_object_ids = [ "74e06b24-3114-4d29-91ba-1535050839fb" ]
   }
 
-  kubernetes_version = "1.28.0"
+  kubernetes_version = "1.28.3"
   node_resource_group = "aks-nodes-rg"
 }
 
