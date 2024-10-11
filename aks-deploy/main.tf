@@ -65,7 +65,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   default_node_pool {
     name = "chukky"
     node_count = 2
-    vm_size = "Standard B2s"
+    vm_size = "Standard_B2s"
     vnet_subnet_id = azurerm_subnet.aks_new_subnet.id
   }
 
